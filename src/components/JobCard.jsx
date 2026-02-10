@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import JobCardsList from "./JobCardsList";
 
-/* Departments must match CategoriesSection titles */
 const departments = [
   "EEE",
   "Mechanical",
@@ -38,16 +37,12 @@ function JobCard({ jobs, setJobs }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!setJobs) return;
-
-    // setJobs([...jobs, jobData]);
     const newJob = {
-      id: Date.now(),   // 👈 ADD THIS
+      id: Date.now(),  
       ...jobData,
     };
 
     setJobs([...jobs, newJob]);
-
-
     setJobData({
       department: "",
       role: "",
@@ -70,7 +65,6 @@ function JobCard({ jobs, setJobs }) {
       <h2 className="mb-4">Post a Job</h2>
 
       <Form onSubmit={handleSubmit}>
-        {/* Department & Role */}
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
@@ -106,7 +100,6 @@ function JobCard({ jobs, setJobs }) {
           </Col>
         </Row>
 
-        {/* Company & Experience */}
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
@@ -137,7 +130,6 @@ function JobCard({ jobs, setJobs }) {
           </Col>
         </Row>
 
-        {/* Description */}
         <Form.Group className="mb-3">
           <Form.Label>Job Description</Form.Label>
           <Form.Control
@@ -150,7 +142,6 @@ function JobCard({ jobs, setJobs }) {
           />
         </Form.Group>
 
-        {/* Location & Work Type */}
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
@@ -184,7 +175,6 @@ function JobCard({ jobs, setJobs }) {
           </Col>
         </Row>
 
-        {/* Salary & Contact */}
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">

@@ -23,13 +23,10 @@ function JobCardsList({ jobs=[], deleteJob }) {
             <Card.Body>
               <Card.Title>{job.role}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{job.department}</Card.Subtitle>
-
-               {/* Location */}
               <p className="mb-1">
                 <strong>Location:</strong> {job.location}
               </p>
 
-              {/* Work Type Badge */}
               <p className="mb-2">
                 <strong>Work Type:</strong>{" "}
                 <Badge

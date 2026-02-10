@@ -1,11 +1,9 @@
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import {
   Facebook,
   Twitter,
   Instagram,
   Linkedin,
-  GeoAltFill,
-  EnvelopeFill,
 } from "react-bootstrap-icons";
 
 const Footer = () => {
@@ -41,7 +39,6 @@ const Footer = () => {
             </ul>
           </Col>
 
-          {/* Useful Links */}
           <Col md={3} sm={6} className="mb-4">
             <h6 className="fw-semibold mb-3">Useful Links</h6>
             <ul className="list-unstyled text-secondary">

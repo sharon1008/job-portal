@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"; // <- Import
+import { useNavigate } from "react-router-dom"; 
 import "./HeroSearch.css";
 
 const HeroSearch = () => {

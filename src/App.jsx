@@ -45,10 +45,6 @@ function App() {
                 <h3 id="jobs-section" className="mb-4 text-center">Latest Jobs</h3>
                 <JobCardsList jobs={jobs} />
               </div>
-
-
-              {/* <h3 id="jobs-section" className="fw-bold text-center">Latest Jobs</h3>
-              <JobCardsList  jobs={jobs} /> display jobs on home page */}
               
               <TeamSection />
               <Footer />
@@ -64,9 +60,7 @@ function App() {
           element={<CategoryJobs jobs={jobs} />}
         />
         <Route path="/postjob" element={<JobCard jobs={jobs} setJobs={setJobs} />} />
-        {/* <Route path="/jobs/:id" element={<JobDetails jobs={jobs} />} /> */}
         <Route path="/jobs/:id" element={<JobDetails />} />
-
 
         {/* AUTH PAGES */}
         <Route path="/signin" element={<SignIn />} />

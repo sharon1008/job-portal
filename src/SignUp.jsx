@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
-    // 1. State for loading and form data
+    // State for loading and form data
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
@@ -46,7 +46,7 @@ const SignUp = () => {
         <Col md={10} lg={8}>
           <Row className="shadow rounded overflow-hidden">
             
-            {/* LEFT PANEL (optional – Welcome Back) */}
+            {/* LEFT PANEL ( Welcome Back) */}
             <Col
               md={6}
               className="d-none d-md-flex flex-column justify-content-center align-items-center text-white p-5"

@@ -2,11 +2,11 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./CategoriesSection.css";
 import {
-  FaBolt,          // Electrical
-  FaCogs,          // Mechanical
-  FaLaptopCode,    // Computer Science
-  FaHardHat,       // Civil
-  FaMicrochip,      // Electronics & Communication (EC)
+  FaBolt,          
+  FaCogs,          
+  FaLaptopCode,   
+  FaHardHat,       
+  FaMicrochip,      
   FaBrain,
   FaEllipsisH,
   FaBriefcase
