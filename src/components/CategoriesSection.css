@@ -1,0 +1,16 @@
+.category-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.category-icon {
+  font-size: 36px;
+  color: #e63946; /* same red as your buttons */
+}
