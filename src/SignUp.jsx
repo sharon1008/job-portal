@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
-    // State for loading and form data
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "", teacherCode: "" });
   const [error, setError] = useState("");
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,17 +20,23 @@ const SignUp = () => {
     setTimeout(() => {
       // Get existing users from localStorage
       const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      // Check if email already exists
       const userExists = users.find((u) => u.email === formData.email);
       if (userExists) {
         setError("User with this email already exists!");
         setLoading(false);
         return;
       }
+      const TEACHER_CODE = "TEACH123"; 
+      const role = formData.teacherCode === TEACHER_CODE ? "teacher" : "student";
+
+      // Create new user object
+      const newUser = {
+        ...formData,
+        role
+      };
 
       // Save new user to localStorage
-      users.push(formData);
+      users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
 
       setLoading(false);
@@ -39,14 +44,12 @@ const SignUp = () => {
     }, 1500);
   };
 
-
   return (
     <Container fluid className="vh-100 d-flex align-items-center bg-light">
       <Row className="w-100 justify-content-center">
         <Col md={10} lg={8}>
           <Row className="shadow rounded overflow-hidden">
-            
-            {/* LEFT PANEL ( Welcome Back) */}
+
             <Col
               md={6}
               className="d-none d-md-flex flex-column justify-content-center align-items-center text-white p-5"
@@ -63,13 +66,11 @@ const SignUp = () => {
               </Button>
             </Col>
 
-            {/* RIGHT PANEL (SIGN UP FORM) */}
             <Col md={6} className="p-5 bg-white">
               <h3 className="fw-bold text-center mb-3">Create Account</h3>
 
               {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
-
-              {/* Social Icons */}
+              
               <div className="d-flex justify-content-center gap-3 mb-3">
                 <div className="border rounded-circle p-2">
                   <FaFacebookF />
@@ -107,6 +108,18 @@ const SignUp = () => {
                     onChange={handleChange}
                     required />
                 </Form.Group>
+
+                <Form.Group className="mb-3">
+                <Form.Label>Teacher Code (if you are a teacher)</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="teacherCode"
+                  value={formData.teacherCode}
+                  onChange={handleChange}
+                  placeholder="Enter code if teacher"
+                />
+              </Form.Group>
+
 
                 <div className="d-grid">
                   <Button

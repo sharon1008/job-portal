@@ -19,13 +19,15 @@ function MainNavbar({ isLoggedIn, setIsLoggedIn }) {
           <Nav className="mx-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link href="#jobs-section">Jobs</Nav.Link>
-            <Nav.Link as={Link} to="/postjob">PostJob</Nav.Link>
+            {localStorage.getItem("loggedInRole") === "teacher" && (
+              <Nav.Link as={Link} to="/postjob">Post Job</Nav.Link>
+            )}
+
             <Nav.Link href="/home#contact">Contact</Nav.Link>
           </Nav>
 
           <div className="d-flex gap-2">
             {isLoggedIn ? (
-              // SHOW LOGOUT WHEN LOGGED IN
               <Button
                 variant="danger"
                 size="sm"
@@ -34,7 +36,6 @@ function MainNavbar({ isLoggedIn, setIsLoggedIn }) {
                 Logout
               </Button>
             ) : (
-              // SHOW SIGNIN & SIGNUP WHEN NOT LOGGED IN
               <>
                 <Link to="/signin">
                   <Button variant="outline-light" size="sm">

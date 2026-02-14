@@ -17,12 +17,10 @@ import SearchResults from "./components/SearchResult";
 
 function App() {
 
-  // Check login status
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("loggedInUser") ? true : false
   );
   
-  //Load jobs from localStorage
   const [jobs, setJobs] = useState(() => {
     const savedJobs = localStorage.getItem("jobs");
     return savedJobs ? JSON.parse(savedJobs) : [];
@@ -40,12 +38,8 @@ function App() {
         setIsLoggedIn={setIsLoggedIn} 
       />
       <Routes>
-
-        {/* Default Route → Signup */}
         <Route path="/" element={<Navigate to="/signup" />} />
-
-        {/* AUTH ROUTES */}
-        {/* SIGNUP */}
+          {/* SIGNUP */}
         <Route
           path="/signup"
           element={
@@ -93,47 +87,45 @@ function App() {
             )
           }
         />
+
         <Route
-        path="/results"
-        element={
-          isLoggedIn ? <SearchResults /> : <Navigate to="/signin" />
-        }
-      />
+          path="/results"
+          element={
+            isLoggedIn ? <SearchResults /> : <Navigate to="/signin" />
+          }
+        />
 
-      <Route
-        path="/category/:categoryName"
-        element={
-          isLoggedIn ? (
-            <CategoryJobs jobs={jobs} />
-          ) : (
-            <Navigate to="/signin" />
-          )
-        }
-      />
+        <Route
+          path="/category/:categoryName"
+          element={
+            isLoggedIn ? (
+              <CategoryJobs jobs={jobs} />
+            ) : (
+              <Navigate to="/signin" />
+            )
+          }
+        />
 
-      <Route
-        path="/postjob"
-        element={
-          isLoggedIn ? (
-            <JobCard jobs={jobs} setJobs={setJobs} />
-          ) : (
-            <Navigate to="/signin" />
-          )
-        }
-      />
+        <Route
+          path="/postjob"
+          element={
+            isLoggedIn && localStorage.getItem("loggedInRole") === "teacher" ? (
+              <JobCard jobs={jobs} setJobs={setJobs} />
+            ) : (
+              <Navigate to="/home" />
+            )
+          }
+        />
 
-      <Route
-        path="/jobs/:id"
-        element={
-          isLoggedIn ? <JobDetails /> : <Navigate to="/signin" />
+        <Route
+          path="/jobs/:id"
+          element={
+            isLoggedIn ? <JobDetails jobs={jobs} setJobs={setJobs}/> : <Navigate to="/signin" />
+          }
+        />       
+              </Routes>
+            </Router>
+          );
         }
-      />
-
-            
-              
-            </Routes>
-          </Router>
-        );
-      }
 
 export default App;

@@ -11,7 +11,7 @@ const SignIn = ({ setIsLoggedIn }) => {
     const [error, setError] = useState("");
 
     const handleSignIn = (e) => {
-        e.preventDefault(); // STOPS the automatic navigation/refresh
+        e.preventDefault();
         setLoading(true);
         setError("");
 
@@ -20,9 +20,8 @@ const SignIn = ({ setIsLoggedIn }) => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
-        // setLoading(false);
-        // navigate("/"); // Login success
         localStorage.setItem("loggedInUser", JSON.stringify(user));
+        localStorage.setItem("loggedInRole", user.role);
         setIsLoggedIn(true);
         setLoading(false);
         navigate("/home");
@@ -39,13 +38,11 @@ const SignIn = ({ setIsLoggedIn }) => {
         <Col md={10} lg={8}>
           <Row className="shadow rounded overflow-hidden">
 
-            {/* LEFT PANEL – SIGN IN FORM */}
             <Col md={6} className="bg-white p-5">
               <h3 className="fw-bold text-center mb-3">Sign in</h3>
 
               {error && <Alert variant="danger" className="py-2 small">{error}</Alert>}
 
-              {/* Social icons */}
               <div className="d-flex justify-content-center gap-3 mb-3">
                 <span className="border rounded-circle p-2">
                   <FaFacebookF />
@@ -101,7 +98,6 @@ const SignIn = ({ setIsLoggedIn }) => {
               </Form>
             </Col>
 
-            {/* RIGHT PANEL – HELLO FRIEND */}
             <Col
               md={6}
               className="d-flex flex-column justify-content-center align-items-center text-white p-5"

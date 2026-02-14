@@ -14,6 +14,8 @@ const departments = [
 ];
 
 function JobCard({ jobs, setJobs }) {
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const loggedInRole = localStorage.getItem("loggedInRole");
   const [jobData, setJobData] = useState({
     department: "",
     role: "",
@@ -41,6 +43,7 @@ function JobCard({ jobs, setJobs }) {
     const newJob = {
       id: Date.now(),  
       ...jobData,
+      postedBy: loggedInUser,
     };
     setJobs([...jobs, newJob]);
     
@@ -60,6 +63,14 @@ function JobCard({ jobs, setJobs }) {
   const deleteJob = (index) => {
     setJobs(jobs.filter((_, i) => i !== index));
   };
+
+  if (loggedInRole !== "teacher") {
+    return (
+      <Container className="mt-5 text-center">
+        <h3>Only teachers can post jobs.</h3>
+      </Container>
+    );
+  }
 
   return (
     <Container className="mt-4">

@@ -9,7 +9,6 @@ const HeroSearch = () => {
   const [jobs, setJobs] = useState([]);
   const navigate = useNavigate();
 
-  // Load jobs from localStorage
   useEffect(() => {
     const storedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
     setJobs(storedJobs);
