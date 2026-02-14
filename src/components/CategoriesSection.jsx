@@ -13,13 +13,13 @@ import {
 } from "react-icons/fa";
 
 const categories = [
-  { icon: <FaBolt />, title: "EEE", jobs: "300 open positions" },
-  { icon: <FaCogs />, title: "Mechanical", jobs: "210 open positions" },
-  { icon: <FaLaptopCode />, title: "CS/IT", jobs: "180 open positions" },
-  { icon: <FaHardHat />, title: "Civil", jobs: "120 open positions" },
-  { icon: <FaMicrochip />, title: "EC", jobs: "150 open positions" },
+  { icon: <FaBolt />, title: "EEE" },
+  { icon: <FaCogs />, title: "Mechanical" },
+  { icon: <FaLaptopCode />, title: "CS/IT" },
+  { icon: <FaHardHat />, title: "Civil"},
+  { icon: <FaMicrochip />, title: "EC" },
   { icon: <FaBrain />, title: "AI & Data Science" },
-  { icon: <FaBriefcase />, title: "Business", jobs: "120 open positions" },
+  { icon: <FaBriefcase />, title: "Business" },
   { icon: <FaEllipsisH />, title: "Others" },
 ];
 

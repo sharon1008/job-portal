@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 
-function MainNavbar() {
+function MainNavbar({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser");
+    setIsLoggedIn(false);
+    navigate("/signin");
+  };
   return (
     <Navbar style={{ backgroundColor: "#0F172A" }} variant="dark" expand="lg">
       <Container>
@@ -13,16 +20,36 @@ function MainNavbar() {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link href="#jobs-section">Jobs</Nav.Link>
             <Nav.Link as={Link} to="/postjob">PostJob</Nav.Link>
-            <Nav.Link href="/#contact">Contact</Nav.Link>
+            <Nav.Link href="/home#contact">Contact</Nav.Link>
           </Nav>
 
           <div className="d-flex gap-2">
-            <Link to="/signin">
-              <Button variant="outline-light" size="sm">Sign In</Button>
-            </Link>
-            <Link to="/signup">
-              <Button variant="danger" size="sm">Sign Up</Button>
-            </Link>  
+            {isLoggedIn ? (
+              // SHOW LOGOUT WHEN LOGGED IN
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            ) : (
+              // SHOW SIGNIN & SIGNUP WHEN NOT LOGGED IN
+              <>
+                <Link to="/signin">
+                  <Button variant="outline-light" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+
+                <Link to="/signup">
+                  <Button variant="danger" size="sm">
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
+ 
           </div>
         </Navbar.Collapse>
       </Container>

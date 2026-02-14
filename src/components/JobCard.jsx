@@ -37,12 +37,13 @@ function JobCard({ jobs, setJobs }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!setJobs) return;
+
     const newJob = {
       id: Date.now(),  
       ...jobData,
     };
-
     setJobs([...jobs, newJob]);
+    
     setJobData({
       department: "",
       role: "",

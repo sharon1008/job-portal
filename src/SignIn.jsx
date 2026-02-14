@@ -3,7 +3,7 @@ import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const SignIn = () => {
+const SignIn = ({ setIsLoggedIn }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,8 +20,12 @@ const SignIn = () => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
+        // setLoading(false);
+        // navigate("/"); // Login success
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        setIsLoggedIn(true);
         setLoading(false);
-        navigate("/"); // Login success
+        navigate("/home");
       } else {
         setLoading(false);
         setError("Invalid email or password. Please register first.");

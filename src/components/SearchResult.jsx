@@ -28,7 +28,7 @@ const SearchResults = () => {
           )}
 
           <Link to="/">
-            <Button variant="secondary" className="mt-3">Back to Search</Button>
+            <Button variant="secondary" className="mt-3">Back</Button>
           </Link>
         </Col>
       </Row>

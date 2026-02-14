@@ -17,7 +17,7 @@ function JobCardsList({ jobs=[], deleteJob }) {
           <Card
             className="job-card h-100"
             style={{ cursor: "pointer" }}
-            onClick={() => navigate(`/jobs/${job.id}`)}
+            onClick={() => navigate(`/jobs/${job.id}`)} //job details
           >
 
             <Card.Body>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,Navigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 import CategoriesSection from "./components/CategoriesSection";
 import Footer from "./components/Footer";
@@ -16,6 +16,11 @@ import SearchResults from "./components/SearchResult";
 
 
 function App() {
+
+  // Check login status
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("loggedInUser") ? true : false
+  );
   
   //Load jobs from localStorage
   const [jobs, setJobs] = useState(() => {
@@ -30,19 +35,52 @@ function App() {
    
   return (
     <Router>
-      <MainNavbar />
+      <MainNavbar 
+        isLoggedIn={isLoggedIn} 
+        setIsLoggedIn={setIsLoggedIn} 
+      />
       <Routes>
+
+        {/* Default Route → Signup */}
+        <Route path="/" element={<Navigate to="/signup" />} />
+
+        {/* AUTH ROUTES */}
+        {/* SIGNUP */}
+        <Route
+          path="/signup"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/home" />
+            ) : (
+              <SignUp />
+            )
+          }
+        />
+
+        {/* SIGNIN */}
+        <Route
+          path="/signin"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/home" />
+            ) : (
+              <SignIn setIsLoggedIn={setIsLoggedIn} />
+            )
+          }
+        />
 
         {/* HOME PAGE */}
         <Route
-          path="/"
+          path="/home"
           element={
+            isLoggedIn ? (
             <>
+              
               <HeroSearch />
                <CategoriesSection/>
               
               <div className="container mt-4 mb-5">
-                <h3 id="jobs-section" className="mb-4 text-center">Latest Jobs</h3>
+                <h3 id="jobs-section" className="mb-4 text-center fw-bold">Latest Jobs</h3>
                 <JobCardsList jobs={jobs} />
               </div>
               
@@ -50,29 +88,52 @@ function App() {
               <Footer />
              
             </>
-            
+            ):(
+              <Navigate to="/signin" />
+            )
           }
         />
-        <Route path="/results" element={<SearchResults />} />
-        {/* CATEGORY PAGE */}
         <Route
-          path="/category/:categoryName"
-          element={<CategoryJobs jobs={jobs} />}
-        />
-        <Route path="/postjob" element={<JobCard jobs={jobs} setJobs={setJobs} />} />
-        <Route path="/jobs/:id" element={<JobDetails />} />
+        path="/results"
+        element={
+          isLoggedIn ? <SearchResults /> : <Navigate to="/signin" />
+        }
+      />
 
-        {/* AUTH PAGES */}
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="/postjob"
-          element={<JobCard jobs={jobs} setJobs={setJobs} />} 
-        />
-        
-      </Routes>
-    </Router>
-  );
-}
+      <Route
+        path="/category/:categoryName"
+        element={
+          isLoggedIn ? (
+            <CategoryJobs jobs={jobs} />
+          ) : (
+            <Navigate to="/signin" />
+          )
+        }
+      />
+
+      <Route
+        path="/postjob"
+        element={
+          isLoggedIn ? (
+            <JobCard jobs={jobs} setJobs={setJobs} />
+          ) : (
+            <Navigate to="/signin" />
+          )
+        }
+      />
+
+      <Route
+        path="/jobs/:id"
+        element={
+          isLoggedIn ? <JobDetails /> : <Navigate to="/signin" />
+        }
+      />
+
+            
+              
+            </Routes>
+          </Router>
+        );
+      }
 
 export default App;
